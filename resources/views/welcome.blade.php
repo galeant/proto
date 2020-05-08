@@ -85,6 +85,7 @@
                 </div>
 
                 <div class="links">
+                    
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
@@ -96,5 +97,6 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/script.js') }}"></script>
     </body>
 </html>
