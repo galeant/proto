@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <!-- <script defer src="{{ asset('js/face-api.min.js') }}"></script> -->
-  <script defer src="{{ asset('js/script.js') }}"></script>
+  <!-- <script defer src="{{ asset('js/script.js') }}"></script> -->
   <style>
     body {
       margin: 0;
