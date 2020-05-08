@@ -26,5 +26,18 @@
 <body>
     test video
   <video id="video" width="720" height="560" autoplay muted></video>
+  <script>
+       navigator.mediaDevices.getUserMedia({ 
+    video: true,
+    width:1280,
+    height:720
+  })
+      .then(function (stream) {
+        video.srcObject = stream;
+      })
+      .catch(function (err0r) {
+        console.log("Something went wrong!");
+      });
+  </script>
 </body>
 </html>
