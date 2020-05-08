@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <!-- <script defer src="{{ asset('js/face-api.min.js') }}"></script> -->
-  <!-- <script defer src="{{ asset('js/script.js') }}"></script> -->
   <style>
     body {
       margin: 0;
@@ -26,18 +19,7 @@
 <body>
     test video
   <video id="video" width="720" height="560" autoplay muted></video>
-  <script>
-       navigator.mediaDevices.getUserMedia({ 
-    video: true,
-    width:1280,
-    height:720
-  })
-      .then(function (stream) {
-        video.srcObject = stream;
-      })
-      .catch(function (err0r) {
-        console.log("Something went wrong!");
-      });
-  </script>
+  <script defer src="{{ asset('js/face-api.min.js') }}"></script>
+  <script defer src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
