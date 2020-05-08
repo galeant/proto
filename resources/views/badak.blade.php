@@ -19,7 +19,7 @@
 <body>
     test video
   <video id="video" width="720" height="560" autoplay muted></video>
-  <script defer src="{{ asset('js/face-api.min.js') }}"></script>
-  <script defer src="{{ asset('js/script.js') }}"></script>
+  <script defer src="https://meetle.herokuapp.com/js/face-api.min.js"></script>
+  <script defer src="https://meetle.herokuapp.com/js/script.js"></script>
 </body>
 </html>
