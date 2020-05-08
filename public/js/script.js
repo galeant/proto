@@ -15,21 +15,21 @@ const video = document.getElementById('video')
 //       console.log("Something went wrong!");
 //     });
 // }
-
-startVideo();
-function startVideo() {
-  navigator.mediaDevices.getUserMedia({ 
-    video: true,
-    width:1280,
-    height:720
-  })
-      .then(function (stream) {
-        video.srcObject = stream;
-      })
-      .catch(function (err0r) {
-        console.log("Something went wrong!");
-      });
-}
+console.log('wdwdwdwd');
+// startVideo();
+// function startVideo() {
+//   navigator.mediaDevices.getUserMedia({ 
+//     video: true,
+//     width:1280,
+//     height:720
+//   })
+//       .then(function (stream) {
+//         video.srcObject = stream;
+//       })
+//       .catch(function (err0r) {
+//         console.log("Something went wrong!");
+//       });
+// }
 
 // video.addEventListener('play', () => {
 //   const canvas = faceapi.createCanvasFromMedia(video)
