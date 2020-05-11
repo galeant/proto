@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('kadal');
+    return view('info');
 });
-Route::get('bebek', function () {
-    return view('bebek');
-});
+Route::get('{select}', 'RTCController@select');
