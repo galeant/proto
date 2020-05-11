@@ -59,7 +59,10 @@
                 }
                 function receiver(id){
                     var peerR = new Peer(id,{
-                        debug:2
+                        debug:2,
+                        config: {'iceServers': [
+                            { url: 'stun:stun.l.google.com:19302' }
+                        ]}
                     });
                     peerR.on('open', function (id) {
                         navigator.mediaDevices.getUserMedia({video:true}).
