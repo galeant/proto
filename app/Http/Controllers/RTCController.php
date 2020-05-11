@@ -14,10 +14,10 @@ class RTCController extends Controller
                 $identifier = NULL;
             break;
             case 'caller1':
-                $identifier = 'uuuuussssrrr1';
+                $identifier = 'uuuuussssrrra1';
             break;
             case 'caller2':
-                $identifier = 'uuuuussssrrr2';
+                $identifier = 'uuuuussssrrra2';
             break;
         }
         return view('kadal',[
