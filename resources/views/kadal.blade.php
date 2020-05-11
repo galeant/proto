@@ -42,8 +42,8 @@
                 switch(selector){
                     case 'receiver':
                         var ar = [
-                            'uuuuussssrrr1',
-                            'uuuuussssrrr2'
+                            'uuuuussssrrra1',
+                            'uuuuussssrrra2'
                         ];
                         for(let i=0;i< ar.length;i++){
                             receiver(ar[i]);
