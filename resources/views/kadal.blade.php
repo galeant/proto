@@ -29,8 +29,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/peerjs@1.2.0/dist/peerjs.min.js"></script>
-        <!-- <script defer src="{{ asset('js/face-api.min.js') }}"></script> -->
+        <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+
+        <script defer src="{{ asset('js/face-api.min.js') }}"></script>
         <script type="text/javascript">
+            // console.log(faceapi.nets)
+                // Promise.all([
+                //     faceapi.nets.tinyFaceDetector.loadFromUri("{{ asset('models') }}"),
+                //     faceapi.nets.faceLandmark68Net.loadFromUri("{{ asset('models') }}"),
+                //     faceapi.nets.faceRecognitionNet.loadFromUri("{{ asset('models') }}"),
+                //     faceapi.nets.faceExpressionNet.loadFromUri("{{ asset('models') }}")
+                // ]).then(receiver)
             (function () {
                 var iden = document.getElementById('iden');
                 var status = document.getElementById('status');
@@ -57,8 +66,13 @@
                         caller(identifier);
                     break;
                 }
+                
+
                 function receiver(id){
                     var peerR = new Peer(id,{
+                        host: 'localhost',
+                        port: 9000,
+                        path: '/',
                         debug:2,
                         config: {'iceServers': [
                             { url: 'stun:stun.l.google.com:19302' }
@@ -70,6 +84,14 @@
                                 recVid.srcObject = stream;
                                 iden.innerHTML = "ID: " + peerR.id;
                                 status.innerHTML = "Awaiting connection...";
+                                // let recorder = RecordRTC(stream, {
+                                //     type: 'video'
+                                // });
+                                // recorder.startRecording();
+                                // recorder.stopRecording(function() {
+                                //     let blob = recorder.getBlob();
+                                //     invokeSaveAsDialog(blob);
+                                // });
                             }).
                             catch(function(er){
                                 console.log(er)
@@ -100,6 +122,9 @@
 
                 function caller(addr){
                     var peerC = new Peer(null, {
+                        host: 'localhost',
+                        port: 9000,
+                        path: '/',
                         debug: 2
                     });
                     peerC.on('open', function (id) {
@@ -116,16 +141,16 @@
                 }
                 
 
-                // u2.addEventListener('play', () => {
-                //     const canvas = faceapi.createCanvasFromMedia(u2)
+                // recVid.addEventListener('play', () => {
+                //     const canvas = faceapi.createCanvasFromMedia(recVid)
                 //     document.body.append(canvas)
                 //     const displaySize = { width: video.width, height: video.height }
                 //     faceapi.matchDimensions(canvas, displaySize)
                 //     setInterval(async () => {
-                //     const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
-                //     const resizedDetections = faceapi.resizeResults(detections, displaySize)
-                //     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-                //     faceapi.draw.drawDetections(canvas, resizedDetections)
+                //         const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+                //         const resizedDetections = faceapi.resizeResults(detections, displaySize)
+                //         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+                //         faceapi.draw.drawDetections(canvas, resizedDetections)
                 //     // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
                 //     // faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
                 //     }, 100)
