@@ -49,9 +49,7 @@
                  
                 peer = new Peer(null, {
                     debug: 2,
-                    host: 'localhost',
-                    port: 9000,
-                    path: '/',
+                    host: 'https://meetles.herokuapp.com/',
                     config: {'iceServers': [
                         { url: 'stun:stun.l.google.com:19302' }
                     ]}

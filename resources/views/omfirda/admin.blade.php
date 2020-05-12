@@ -29,11 +29,12 @@
     <h3>Peer Connnection Demo</h3>
     <div class="row">
       <div class="col-xs-6">
-        <video id="local-video" autoplay muted allow="microphone; camera"></video>
+        <video id="local-video" autoplay muted playsinline></video>
       </div>
-      <div class="col-xs-6">
-        <video id="remote-video" autoplay muted allow="microphone; camera"></video>
+      <div class="row" id="vc" c=0>
+        
       </div>
+      
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -46,6 +47,8 @@
       var localStream = null;
       var localVideoTrack = null;
       var peerConnection = null;
+      var id = 0;
+      var selector = null;
 
       var localVideo = document.querySelector('#local-video');
       var remoteVideo = document.querySelector('#remote-video');
@@ -102,10 +105,19 @@
       }
 
       function onRemoteStreamAdded(event) {
-        remoteVideo.srcObject = event.stream;
-        remoteVideo.autoplay = true;
-        remoteVideo.playsInline = true;
-        remoteVideo.muted = true;
+        console.log(id);
+        // console.log('wdwdwdwdwdwfff');
+        // var c = parseInt($("#vc").attr('c'));
+        // $("#vc").append('<div class="col-xs-3"><video id="us-'+c+'"autoplay muted playsinline></video></div>');
+        // var ad = "#us-"+c;
+        var remote = document.querySelector(selector);
+        // $(ad).attr('cacac','wdwfwfw');
+        // c++;
+        // $("#vc").attr('c',c);
+        remote.srcObject = event.stream;
+        // remoteVideo.autoplay = true;
+        // remoteVideo.playsInline = true;
+        // remoteVideo.muted = true;
         // console.log(remoteVideo.srcObject)
       }
 
@@ -163,6 +175,7 @@
             if (response.result) {
               $.each(response.data, function(i, value) {
                 var sdp = JSON.parse(value.message);
+                id = value.id;
                 if (sdp.type == 'candidate') {
                   // Attach network info
                   var candidate = new RTCIceCandidate({
@@ -174,6 +187,13 @@
                 }
                 if (sdp.type == 'offer') {
                   // console.log('masuk offer')
+                  var af = "#"+id;
+                  console.log($(af).length);
+                  if($(af).length == 0){
+                    $("#vc").append('<div class="col-xs-3"><video id="us-'+id+'"autoplay muted playsinline></video></div>');
+                    selector = "#us-"+id;
+                  }
+                  
                   accept(sdp);
                 }
               });
