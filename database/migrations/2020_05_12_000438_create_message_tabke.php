@@ -18,7 +18,7 @@ class CreateMessageTabke extends Migration
             $table->string('from');
             $table->string('to');
             $table->string('type');
-            $table->string('message');
+            $table->text('message');
             $table->timestamps();
         });
     }
