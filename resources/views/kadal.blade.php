@@ -70,7 +70,7 @@
 
                 function receiver(id){
                     var peerR = new Peer(id,{
-                        host: 'localhost',
+                        host: 'https://meetle.herokuapp.com',
                         port: 9000,
                         path: '/',
                         debug:2,

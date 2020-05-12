@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Message;
 
 class RTCController extends Controller
 {
@@ -24,5 +25,39 @@ class RTCController extends Controller
             'select' => $select,
             'identifier' => $identifier
         ]);
+    }
+
+    public function saveM(Request $request){
+        $data = Message::create([
+            'to' => $request->to,
+            'from' => $request->from,
+            'type' => $request->type,
+            'message' => urldecode($request->message)
+        ]);
+
+        return response()->json($data,200);
+    }
+
+    public function checkM(Request $request){
+        $data = Message::where('to',$request->to)->get();
+        $message = [];
+        foreach($data as $dt){
+            $message[] = [
+                'id' =>$dt->id,
+                'from' => $dt->from,
+                'type' => $dt->type,
+                'message' => urldecode($dt->message)
+            ];
+            Message::where('id',$dt->id)->delete();
+        }
+
+        $length = false;
+        if($message > 0){
+            $length = true;
+        }
+        return response()->json([
+            'result' => $length,
+            'data' => $message
+        ],200);
     }
 }
