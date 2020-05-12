@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('info');
-});
-Route::get('{select}', 'RTCController@select');
+// Route::get('/', function () {
+//     return view('info');
+// });
+// Route::get('{select}', 'RTCController@select');
 
 // Route::get('admin',function(){
 //     return view('omfirda.admin');
@@ -24,5 +24,5 @@ Route::get('{select}', 'RTCController@select');
 // Route::get('client',function(){
 //     return view('omfirda.clinet');
 // });
-// Route::post('saveM','RTCController@saveM');
-// Route::get('checkM','RTCController@checkM');
+// // Route::post('saveM','RTCController@saveM');
+// // Route::get('checkM','RTCController@checkM');
