@@ -127,7 +127,9 @@
                     var xhr = new XMLHttpRequest;
                     // var host = '127.0.0.1:8000';
                     // var path = host + '/a';
-                    var path = "{{ url('saveM') }}";
+                    // var path = "{{ url('saveM') }}";
+                    var path = "https://meetle.herokuapp.com/saveM";
+                    
 
                     xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4 && xhr.status == 200) {
@@ -146,7 +148,8 @@
                     var xhr = new XMLHttpRequest;
                     // var host = '127.0.0.1:8000';
                     // var path = host + '/dor?to=alice';
-                    var path = "{{ url('checkM') }}?to=alice";
+                    // var path = "{{ url('checkM') }}?to=alice";
+                    var path = "https://meetle.herokuapp.com/checkM?to=alice";
                     var response = null;
 
                     xhr.onreadystatechange = function() {
