@@ -57,7 +57,7 @@
                         for(let i=0;i< ar.length;i++){
                             receiver(ar[i]);
                         }
-                        
+                        // receiver('uuuuussssrrra1');
                     break;
                     case 'caller1':
                         caller(identifier);
@@ -70,7 +70,7 @@
 
                 function receiver(id){
                     var peerR = new Peer(id,{
-                        host: 'https://meetle.herokuapp.com',
+                        host: 'localhost',
                         port: 9000,
                         path: '/',
                         debug:2,
@@ -98,7 +98,7 @@
                             });
                     });
                     peerR.on('error', function(err){
-                        console(err.message);
+                        console.log(err.message);
                     });
                     peerR.on('call', function(call) {
                         console.log(call.peer)

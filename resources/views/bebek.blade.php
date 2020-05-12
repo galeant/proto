@@ -51,7 +51,10 @@
                     debug: 2,
                     host: 'localhost',
                     port: 9000,
-                    path: '/'
+                    path: '/',
+                    config: {'iceServers': [
+                        { url: 'stun:stun.l.google.com:19302' }
+                    ]}
                 });
                 
                 

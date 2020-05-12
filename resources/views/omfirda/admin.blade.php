@@ -29,10 +29,10 @@
     <h3>Peer Connnection Demo</h3>
     <div class="row">
       <div class="col-xs-6">
-        <video id="local-video" autoplay muted></video>
+        <video id="local-video" autoplay muted allow="microphone; camera"></video>
       </div>
       <div class="col-xs-6">
-        <video id="remote-video" autoplay muted></video>
+        <video id="remote-video" autoplay muted allow="microphone; camera"></video>
       </div>
     </div>
   </div>
@@ -74,6 +74,7 @@
         peerConnection.onicecandidate = onIceCandidate;
         peerConnection.onaddstream = onRemoteStreamAdded;
         peerConnection.onremovestream = onRemoteStreamRemoved;
+        // console.log(localStream);
         // Set remote description
         peerConnection.setRemoteDescription(new RTCSessionDescription(message));
         // Attach video
@@ -84,7 +85,7 @@
 
       // Got network info
       function onIceCandidate(event) {
-        console.log('onIceCandidate event: ', event);
+        // console.log('onIceCandidate event: ', event);
         if (event.candidate) {
           // Send candidate
           var candidate = {
@@ -102,6 +103,10 @@
 
       function onRemoteStreamAdded(event) {
         remoteVideo.srcObject = event.stream;
+        remoteVideo.autoplay = true;
+        remoteVideo.playsInline = true;
+        remoteVideo.muted = true;
+        // console.log(remoteVideo.srcObject)
       }
 
       function onRemoteStreamRemoved(event) {
@@ -109,8 +114,10 @@
       }
 
       function setLocalAndSaveMessage(sessionDescription) {
-        console.log('Got session description: ' , sessionDescription);
+        console.log('wdwdwdwd');
+        // console.log('Got session description: ' , sessionDescription);
         peerConnection.setLocalDescription(sessionDescription);
+        console.log(peerConnection)
         saveMessage("from=bob&to=alice&type=answer&message=" + JSON.stringify(sessionDescription));
       }
 
@@ -126,8 +133,8 @@
         var xhr = new XMLHttpRequest;
         // var host = location.protocol + '//' + location.host;
         // var path = host + '/saveMessage.php';
-        // var path = "{{ url('saveM') }}";
-        var path = "https://meetle.herokuapp.com/saveM";
+        var path = "{{ url('saveM') }}";
+        // var path = "https://meetle.herokuapp.com/saveM";
 
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
@@ -146,8 +153,8 @@
         var xhr = new XMLHttpRequest;
         // var host = location.protocol + '//' + location.host;
         // var path = host + '/checkMessage.php' + '?to=bob';
-        // var path = "{{ url('checkM') }}?to=bob";
-        var path = "https://meetle.herokuapp.com/checkM?to=bob";
+        var path = "{{ url('checkM') }}?to=bob";
+        // var path = "https://meetle.herokuapp.com/checkM?to=bob";
         var response = null;
 
         xhr.onreadystatechange = function() {
@@ -166,6 +173,7 @@
                   peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
                 }
                 if (sdp.type == 'offer') {
+                  // console.log('masuk offer')
                   accept(sdp);
                 }
               });
