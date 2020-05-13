@@ -39,6 +39,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/peerjs@1.2.0/dist/peerjs.min.js"></script>
+        <script src="{{ asset('js/adapter.js') }}"></script>
         <script>
             $(function() {
                 var servers = null;
@@ -127,8 +128,8 @@
                     var xhr = new XMLHttpRequest;
                     // var host = '127.0.0.1:8000';
                     // var path = host + '/a';
-                    // var path = "{{ url('saveM') }}";
-                    var path = "https://meetle.herokuapp.com/saveM";
+                    var path = "{{ url('saveM') }}";
+                    // var path = "https://meetle.herokuapp.com/saveM";
                     
 
                     xhr.onreadystatechange = function() {
@@ -148,8 +149,8 @@
                     var xhr = new XMLHttpRequest;
                     // var host = '127.0.0.1:8000';
                     // var path = host + '/dor?to=alice';
-                    // var path = "{{ url('checkM') }}?to=alice";
-                    var path = "https://meetle.herokuapp.com/checkM?to=alice";
+                    var path = "{{ url('checkM') }}?to=alice";
+                    // var path = "https://meetle.herokuapp.com/checkM?to=alice";
                     var response = null;
 
                     xhr.onreadystatechange = function() {

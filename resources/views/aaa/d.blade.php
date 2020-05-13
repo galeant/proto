@@ -29,10 +29,10 @@
     <h3>Peer Connnection Demo</h3>
     <div class="row">
       <div class="col-xs-6">
-        <video id="local-video" autoplay muted></video>
+        <video id="local-video" autoplay muted allow="microphone; camera"></video>
       </div>
       <div class="col-xs-6">
-        <video id="remote-video" autoplay muted></video>
+        <video id="remote-video" autoplay muted allow="microphone; camera"></video>
       </div>
     </div>
   </div>
@@ -50,15 +50,15 @@
 
       var localVideo = document.querySelector('#local-video');
       var remoteVideo = document.querySelector('#remote-video');
-      var p = null;
-      // navigator.mediaDevices.getUserMedia({ video: true })
-      // .then(function(stream) {
-      //   localStream = stream;
-      //   localVideo.srcObject = localStream;
-      // })
-      // .catch(function(error) {
-      //   alert('Error: ', error);
-      // });
+
+    //   navigator.mediaDevices.getUserMedia({ video: true })
+    //   .then(function(stream) {
+    //     localStream = stream;
+    //     localVideo.srcObject = localStream;
+    //   })
+    //   .catch(function(error) {
+    //     alert('Error: ', error);
+    //   });
 
       
       var looper;
@@ -67,8 +67,8 @@
       function saveMessage(message) {
         var csrf = $('meta[name="csrf-token"]').attr('content');
         var xhr = new XMLHttpRequest;
-        // var path = "{{ url('saveM') }}";
-        var path = "https://meetle.herokuapp.com/saveM";
+        var path = "{{ url('saveM') }}";
+        // var path = "https://meetle.herokuapp.com/saveM";
 
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
@@ -85,8 +85,8 @@
 
       function checkMessage() {
         var xhr = new XMLHttpRequest;
-        // var path = "{{ url('checkM') }}?to=bob";
-        var path = "https://meetle.herokuapp.com/checkM?to=bob";
+        var path = "{{ url('checkM') }}?to=bob";
+        // var path = "https://meetle.herokuapp.com/checkM?to=bob";
         var response = null;
 
         xhr.onreadystatechange = function() {
@@ -95,7 +95,17 @@
             if (response.result) {
               $.each(response.data, function(i, value) {
                 var sdp = JSON.parse(value.message);
+                // if (sdp.type == 'candidate') {
+                //   // Attach network info
+                //   var candidate = new RTCIceCandidate({
+                //     sdpMLineIndex: sdp.label,
+                //     candidate: sdp.candidate
+                //   });
+                //   //alert(JSON.stringify(candidate));
+                //   peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+                // }
                 if (sdp.type == 'offer') {
+                  // console.log('masuk offer')
                   peerInit(sdp);
                 }
               });
@@ -106,36 +116,32 @@
         xhr.send();
       }
 
-      function peerInit(sdp){
-        console.log(JSON.stringify(sdp));
-        p = new SimplePeer({
-          initiator: false,
+      function peerInit(initiator = false){
+        const p = new SimplePeer({
+          initiator: initiator,
           trickle: false,
           config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] }
-        });
+        })
+        
         p.on('error', err => console.log('error', err));
         p.on('signal', data => {
-          saveMessage("from=bob&to=alice&type=answer&message=" + JSON.stringify(data));
-        });
-        p.signal(sdp);
-        p.on('connect', function(peer){
-          console.log(peer);
-          console.log('CONNECT')
+          console.log('SIGNAL', JSON.stringify(data));
+          saveMessage("from=bob&to=alice&type=answer&message=" + JSON.stringify(data))
+          p.signal(add)
+        })
+        p.on('connect', () => {
+        console.log('CONNECT')
           p.send('whatever' + Math.random())
-        });
+        })
 
         p.on('data', data => {
           console.log('data: ' + data)
         });
-        
-        p.on('stream', stream => {
-          if ('srcObject' in localVideo) {
-            localVideo.srcObject = stream
-          } else {
-            localVideo.src = window.URL.createObjectURL(stream) // for older browsers
-          }
-          localVideo.play()
-        });
+        // peerConnection.on('signal', data => {
+        //     console.log(data);
+        //     // peer2.signal(data)
+        //     // saveMessage("from=alice&to=bob&type=candidate&message=" + JSON.stringify(candidate));
+        // });
       }
     })
   </script>

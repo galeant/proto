@@ -30,6 +30,4 @@ Route::get('checkM','RTCController@checkM');
 Route::get('/',function(){
     return view('aaa.a');
 });
-Route::get('b',function(){
-    return view('aaa.b');
-});
+Route::get('b','RTCController@b');

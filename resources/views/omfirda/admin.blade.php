@@ -41,6 +41,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/peerjs@1.2.0/dist/peerjs.min.js"></script>
+        <script src="{{ asset('js/adapter.js') }}"></script>
   <script>
      $(function() {
       var servers = null;
@@ -79,6 +80,7 @@
         peerConnection.onremovestream = onRemoteStreamRemoved;
         // console.log(localStream);
         // Set remote description
+        console.log('wdwdwdwdwd');
         peerConnection.setRemoteDescription(new RTCSessionDescription(message));
         // Attach video
         peerConnection.addStream(localStream);
@@ -106,14 +108,7 @@
 
       function onRemoteStreamAdded(event) {
         console.log(id);
-        // console.log('wdwdwdwdwdwfff');
-        // var c = parseInt($("#vc").attr('c'));
-        // $("#vc").append('<div class="col-xs-3"><video id="us-'+c+'"autoplay muted playsinline></video></div>');
-        // var ad = "#us-"+c;
         var remote = document.querySelector(selector);
-        // $(ad).attr('cacac','wdwfwfw');
-        // c++;
-        // $("#vc").attr('c',c);
         remote.srcObject = event.stream;
         // remoteVideo.autoplay = true;
         // remoteVideo.playsInline = true;
@@ -145,8 +140,8 @@
         var xhr = new XMLHttpRequest;
         // var host = location.protocol + '//' + location.host;
         // var path = host + '/saveMessage.php';
-        // var path = "{{ url('saveM') }}";
-        var path = "https://meetle.herokuapp.com/saveM";
+        var path = "{{ url('saveM') }}";
+        // var path = "https://meetle.herokuapp.com/saveM";
 
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
@@ -165,8 +160,8 @@
         var xhr = new XMLHttpRequest;
         // var host = location.protocol + '//' + location.host;
         // var path = host + '/checkMessage.php' + '?to=bob';
-        // var path = "{{ url('checkM') }}?to=bob";
-        var path = "https://meetle.herokuapp.com/checkM?to=bob";
+        var path = "{{ url('checkM') }}?to=bob";
+        // var path = "https://meetle.herokuapp.com/checkM?to=bob";
         var response = null;
 
         xhr.onreadystatechange = function() {
@@ -176,15 +171,15 @@
               $.each(response.data, function(i, value) {
                 var sdp = JSON.parse(value.message);
                 id = value.id;
-                if (sdp.type == 'candidate') {
-                  // Attach network info
-                  var candidate = new RTCIceCandidate({
-                    sdpMLineIndex: sdp.label,
-                    candidate: sdp.candidate
-                  });
-                  //alert(JSON.stringify(candidate));
-                  peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
-                }
+                // if (sdp.type == 'candidate') {
+                //   // Attach network info
+                //   var candidate = new RTCIceCandidate({
+                //     sdpMLineIndex: sdp.label,
+                //     candidate: sdp.candidate
+                //   });
+                //   console.log(JSON.stringify(candidate));
+                //   peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+                // }
                 if (sdp.type == 'offer') {
                   // console.log('masuk offer')
                   var af = "#"+id;
@@ -193,7 +188,7 @@
                     $("#vc").append('<div class="col-xs-3"><video id="us-'+id+'"autoplay muted playsinline></video></div>');
                     selector = "#us-"+id;
                   }
-                  
+                  console.log(sdp);
                   accept(sdp);
                 }
               });

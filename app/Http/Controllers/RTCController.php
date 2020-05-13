@@ -60,4 +60,12 @@ class RTCController extends Controller
             'data' => $message
         ],200);
     }
+
+
+    public function b(Request $request){
+        $name = $request->input('name','bebek');
+        return view('aaa.b',[
+            'name' => $name
+        ]);
+    }
 }
