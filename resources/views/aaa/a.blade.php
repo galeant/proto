@@ -7,6 +7,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>PHP-WebRTC :: Peer Connection (Bob)</title>
   <link rel="stylesheet" href="{{ secure_asset('css/bootstrap.min.css') }}">
+  <!-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> -->
   <style>
     body {
       padding-top: 50px;
@@ -18,6 +19,7 @@
 </head>
 
 <body>
+    <p id="asal">asal</p>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -36,11 +38,17 @@
       </div>
     </div>
   </div>
+  
   <script src="{{ secure_asset('js/jquery-3.2.1.slim.min.js') }}"></script>
-        <script src="{{ secure_asset('js/popper.min.js') }}" ></script>
-        <script src="{{ secure_asset('js/bootstrap.min.js') }}" ></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/peerjs@1.2.0/dist/peerjs.min.js"></script> -->
-        <script src="{{ secure_asset('js/simplepeer.min.js') }}"></script>
+  <script src="{{ secure_asset('js/popper.min.js') }}" ></script>
+  <script src="{{ secure_asset('js/bootstrap.min.js') }}" ></script>
+  <script src="{{ secure_asset('js/simplepeer.min.js') }}"></script>
+
+  <!-- <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
+  <script src="{{ asset('js/popper.min.js') }}" ></script>
+  <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
+  <script src="{{ asset('js/simplepeer.min.js') }}"></script> -->
+
   <script>
      $(function() {
       var servers = null;
@@ -133,7 +141,8 @@
         });
 
         p.on('data', data => {
-          console.log('data: ' + data)
+          $("#asal").text(data);
+          // console.log('data: ' + data)
         });
         
         p.on('stream', stream => {
