@@ -118,6 +118,7 @@
         console.log(JSON.stringify(sdp));
         p = new SimplePeer({
           initiator: false,
+          iceTransportPolicy:'relay',
           trickle: false,
           config: { iceServers: [
             {

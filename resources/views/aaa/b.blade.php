@@ -123,6 +123,7 @@
                     p = new SimplePeer({
                         initiator: true,
                         trickle: false,
+                        iceTransportPolicy:'relay',
                         // stream: stream,
                         channelName:name,
                         config: { 
