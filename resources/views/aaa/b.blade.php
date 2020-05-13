@@ -116,7 +116,7 @@
                     p = new SimplePeer({
                         initiator: true,
                         trickle: false,
-                        stream: stream,
+                        // stream: stream,
                         channelName:name,
                         config: { 
                             iceServers: [
