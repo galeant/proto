@@ -127,8 +127,11 @@
                         channelName:name,
                         config: { 
                             iceServers: [
-                                { urls: 'stun:stun.l.google.com:19302' }, 
-                                { urls: 'stun:global.stun.twilio.com:3478?transport=udp' },
+                                {
+                                    urls: "stun:numb.viagenie.ca",
+                                    username: "galeant12@gmail.com",
+                                    credential: "admin123"
+                                }
                                 {
                                     urls: "turn:numb.viagenie.ca",
                                     username: "galeant12@gmail.com",
