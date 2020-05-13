@@ -131,7 +131,7 @@
                                     urls: "stun:numb.viagenie.ca",
                                     username: "galeant12@gmail.com",
                                     credential: "admin123"
-                                }
+                                },
                                 {
                                     urls: "turn:numb.viagenie.ca",
                                     username: "galeant12@gmail.com",
