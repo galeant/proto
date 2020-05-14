@@ -124,7 +124,7 @@
                         initiator: true,
                         trickle: false,
                         iceTransportPolicy:'relay',
-                        // stream: stream,
+                        stream: stream,
                         channelName:name,
                         config: { 
                             iceServers: [
