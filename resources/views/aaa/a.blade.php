@@ -31,7 +31,7 @@
     <h3>Peer Connnection Demo</h3>
     <div class="row">
       <div class="col-xs-6">
-        <video id="local-video" autoplay muted></video>
+        <video id="local-video" autoplay muted playsinline></video>
       </div>
       <div class="col-xs-6">
         <video id="remote-video" autoplay muted></video>
