@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>PHP-WebRTC :: Peer Connection (Alice)</title>
-        <link rel="stylesheet" href="{{ secure_asset('css/bootstrap.min.css') }}">
-        <!-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> -->
+        <!-- <link rel="stylesheet" href="{{ secure_asset('css/bootstrap.min.css') }}"> -->
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <style>
             body {
             padding-top: 50px;
@@ -37,15 +37,15 @@
             </div>
         </div>
 
-        <script src="{{ secure_asset('js/jquery-3.2.1.slim.min.js') }}"></script>
+        <!-- <script src="{{ secure_asset('js/jquery-3.2.1.slim.min.js') }}"></script>
         <script src="{{ secure_asset('js/popper.min.js') }}" ></script>
         <script src="{{ secure_asset('js/bootstrap.min.js') }}" ></script>
-        <script src="{{ secure_asset('js/simplepeer.min.js') }}"></script>
+        <script src="{{ secure_asset('js/simplepeer.min.js') }}"></script> -->
 
-        <!-- <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
         <script src="{{ asset('js/popper.min.js') }}" ></script>
         <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
-        <script src="{{ asset('js/simplepeer.min.js') }}"></script> -->
+        <script src="{{ asset('js/simplepeer.min.js') }}"></script>
 
         <script>
             $(function() {
@@ -57,7 +57,7 @@
                 var remoteVideo = document.querySelector('#remote-video');
                 var name = $('body').attr('name');
                 console.log(name);
-                var p = null;
+                var p = [];
                 navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function(stream) {
                     localStream = stream;
@@ -79,8 +79,8 @@
                 function saveMessage(message) {
                     var csrf = $('meta[name="csrf-token"]').attr('content');
                     var xhr = new XMLHttpRequest;
-                    // var path = "{{ url('saveM') }}";
-                    var path = "https://meetle.herokuapp.com/saveM";
+                    var path = "{{ url('saveM') }}";
+                    // var path = "https://meetle.herokuapp.com/saveM";
                     
 
                     xhr.onreadystatechange = function() {
@@ -98,8 +98,8 @@
 
                 function checkMessage() {
                     var xhr = new XMLHttpRequest;
-                    // var path = "{{ url('checkM') }}?to=alice";
-                    var path = "https://meetle.herokuapp.com/checkM?to=alice";
+                    var path = "{{ url('checkM') }}?to=alice";
+                    // var path = "https://meetle.herokuapp.com/checkM?to=alice";
                     var response = null;
 
                     xhr.onreadystatechange = function() {
@@ -109,7 +109,7 @@
                             $.each(response.data, function(i, value) {
                                 var sdp = JSON.parse(value.message);
                                 if (sdp.type == 'answer') {
-                                    p.signal(sdp);
+                                    p[name].signal(sdp);
                                 }
                             });
                         }
@@ -120,12 +120,11 @@
                 }
                 
                 function peerInit(stream){
-                    p = new SimplePeer({
+                    p[name] = new SimplePeer({
                         initiator: true,
                         trickle: false,
                         iceTransportPolicy:'relay',
                         stream: stream,
-                        channelName:name,
                         config: { 
                             iceServers: [
                                 {
@@ -141,16 +140,16 @@
                             ]
                         }
                     });
-                    p.on('error', err => console.log('error', err));
-                    p.on('data', data => {
+                    p[name].on('error', err => console.log('error', err));
+                    p[name].on('data', data => {
                         console.log('data: ' + data)
                     });
-                    p.on('signal', data => {
+                    p[name].on('signal', data => {
                         console.log('SIGNAL', JSON.stringify(data))    
-                        saveMessage("from=alice&to=bob&type=offer&message=" + JSON.stringify(data));
+                        saveMessage("from=alice&to=bob&code="+name+"&type=offer&message=" + JSON.stringify(data));
                     });
-                    p.on('connect', function(){
-                        p.send(name);
+                    p[name].on('connect', function(){
+                        p[name].send(name);
                     });
                 }
             })

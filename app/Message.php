@@ -8,6 +8,6 @@ class Message extends Model
 {
     protected $tabel = 'message';
     protected $fillable = [
-        'from','to','type','message'
+        'from','to','type','message','code'
     ];
 }

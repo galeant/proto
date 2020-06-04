@@ -32,6 +32,7 @@ class RTCController extends Controller
             'to' => $request->to,
             'from' => $request->from,
             'type' => $request->type,
+            'code' => $request->code,
             'message' => urldecode($request->message)
         ]);
 
@@ -46,6 +47,7 @@ class RTCController extends Controller
                 'id' =>$dt->id,
                 'from' => $dt->from,
                 'type' => $dt->type,
+                'code' => $dt->code,
                 'message' => urldecode($dt->message)
             ];
             Message::where('id',$dt->id)->delete();
