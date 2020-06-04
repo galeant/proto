@@ -18,16 +18,16 @@ Route::get('/', function () {
 });
 // Route::get('{select}', 'RTCController@select');
 
-Route::get('admin',function(){
-    return view('omfirda.admin');
-});
-Route::get('client',function(){
-    return view('omfirda.clinet');
-});
-Route::post('saveM','RTCController@saveM');
-Route::get('checkM','RTCController@checkM');
+// Route::get('admin',function(){
+//     return view('omfirda.admin');
+// });
+// Route::get('client',function(){
+//     return view('omfirda.clinet');
+// });
+// Route::post('saveM','RTCController@saveM');
+// Route::get('checkM','RTCController@checkM');
 
-Route::get('/',function(){
-    return view('aaa.a');
-});
-Route::get('b','RTCController@b');
+// Route::get('/',function(){
+//     return view('aaa.a');
+// });
+// Route::get('b','RTCController@b');
