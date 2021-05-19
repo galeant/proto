@@ -37,6 +37,7 @@
     <!-- Icons-->
     <link href="{{ asset('css/free.min.css') }}" rel="stylesheet"> <!-- icons -->
     <link href="{{ asset('css/flag-icon.min.css') }}" rel="stylesheet"> <!-- icons -->
+    <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"> <!-- icons -->
     <!-- Main styles for this application-->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
@@ -85,6 +86,7 @@
     <!-- CoreUI and necessary plugins-->
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
     <script src="{{ asset('js/coreui-utils.js') }}"></script>
+    <script src="{{ asset('js/fontawesome.min.js') }}"></script>
     @yield('javascript')
 
 
