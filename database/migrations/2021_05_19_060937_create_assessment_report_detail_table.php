@@ -15,6 +15,7 @@ class CreateAssessmentReportDetailTable extends Migration
     {
         Schema::create('assessment_report_detail', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('assessment_report_id');
             $table->bigInteger('assessment_id');
             $table->integer('nilai');
             $table->string('penilai');

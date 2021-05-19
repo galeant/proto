@@ -16,9 +16,7 @@ class CreateAssessmentReportTable extends Migration
         Schema::create('assessment_report', function (Blueprint $table) {
             $table->id();
             $table->string('staff_name');
-            $table->bigInteger('wilayah_id');
-            $table->bigInteger('cabang_id');
-            $table->bigInteger('outlet_id');
+            $table->bigInteger('branch_id');
             $table->bigInteger('camera_id');
             $table->integer('point_summary');
             $table->string('grade_summary');

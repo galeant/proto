@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCabangTable extends Migration
+class CreateBranchTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateCabangTable extends Migration
      */
     public function up()
     {
-        Schema::create('cabang', function (Blueprint $table) {
+        Schema::create('branch', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('name');
-            $table->string('abr');
+            $table->string('code_wilayah');
+            $table->string('code_cabang');
+            $table->string('code_outlet');
+            $table->string('abr_cabang');
+            $table->string('name_outlet');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateCabangTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cabang');
+        Schema::dropIfExists('branch');
     }
 }
