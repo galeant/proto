@@ -17,7 +17,7 @@
           </div>
         </li>
       </ul>
-      <div class="c-subheader px-3">
+      {{-- <div class="c-subheader px-3">
         <ol class="breadcrumb border-0 m-0">
           <?php
                 $path = explode('.',Request::route()->getName());
@@ -31,5 +31,5 @@
             @endif
             @endfor
         </ol>
-      </div>
+      </div> --}}
     </header>

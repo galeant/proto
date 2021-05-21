@@ -1,4 +1,6 @@
-<div class="c-sidebar-brand"><img class="c-sidebar-brand-full" src="/assets/brand/coreui-base-white.svg" width="118" height="46" alt="CoreUI Logo"><img class="c-sidebar-brand-minimized" src="assets/brand/coreui-signet-white.svg" width="118" height="46" alt="CoreUI Logo"></div>
+<div class="c-sidebar-brand">
+    <img class="c-sidebar-brand-full" src="/assets/brand/coreui-base-white.svg" width="118" height="46" alt="CoreUI Logo">
+</div>
  <ul class="c-sidebar-nav ps ps--active-y">
     <li class="c-sidebar-nav-item">
        <a class="c-sidebar-nav-link" href="#">
@@ -26,9 +28,9 @@
             <i class="c-sidebar-nav-icon fa fa-book"></i>Master Data
         </a>
        <ul class="c-sidebar-nav-dropdown-items">
-          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span
+          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{route('master_data.assessment.view')}}"><span
                    class="c-sidebar-nav-icon"></span> Assesment</a></li>
-          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span
+          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{route('master_data.branch.view')}}"><span
                    class="c-sidebar-nav-icon"></span> Branch</a></li>
        </ul>
     </li>
